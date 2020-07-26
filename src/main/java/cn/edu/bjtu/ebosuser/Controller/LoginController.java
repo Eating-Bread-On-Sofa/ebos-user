@@ -158,6 +158,11 @@ public class LoginController {
         return ResultFactory.buildFailResult("未知错误");
     }
 
+    @GetMapping("/ping")
+    public String ping() {
+        return "pong";
+    }
+
 
 
 }

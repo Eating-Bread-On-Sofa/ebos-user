@@ -19,15 +19,12 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Configuration
-public class ShrioConfiguration {
+public class ShiroConfiguration {
     @Bean
     public static LifecycleBeanPostProcessor getLifecycleBeanProcessor() {
         return new LifecycleBeanPostProcessor();
     }
 
-    public URLPathMatchingFilter getURLPathMatchingFilter() {
-        return new URLPathMatchingFilter();
-    }
 
     @Bean
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
@@ -51,6 +48,10 @@ public class ShrioConfiguration {
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
         return shiroFilterFactoryBean;
+    }
+
+    public URLPathMatchingFilter getURLPathMatchingFilter() {
+        return new URLPathMatchingFilter();
     }
 
     @Bean
@@ -86,13 +87,13 @@ public class ShrioConfiguration {
     @Bean
     public CookieRememberMeManager rememberMeManager() {
         CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
-        cookieRememberMeManager.setCookie(remeberMeCookie());
+        cookieRememberMeManager.setCookie(rememberMeCookie());
         cookieRememberMeManager.setCipherKey("EVANNIGHTLY_WAOU".getBytes());
         return cookieRememberMeManager;
     }
 
     @Bean
-    public SimpleCookie remeberMeCookie() {
+    public SimpleCookie rememberMeCookie() {
         SimpleCookie simpleCookie = new SimpleCookie("rememberMe");
         simpleCookie.setMaxAge(259200);
         return simpleCookie;

@@ -24,8 +24,8 @@ public class SystemInfoController {
     }
 
     @PostMapping("/system/logo")
-    public String logoUpload(MultipartFile file) {
-        String folder = "/home/qds/edgexImg/";
+    public String logoUpload(@RequestParam("file") MultipartFile file) {
+        String folder = getLogoImgFolder();
         File imageFolder = new File(folder);
         if (!imageFolder.exists())
             imageFolder.mkdirs();
@@ -33,13 +33,17 @@ public class SystemInfoController {
 
         try {
             file.transferTo(f);
-            String imgUrl = "http://localhost:8093/api/file/" + f.getName();
+            String imgUrl = f.getName();
             return imgUrl;
         } catch (IOException e) {
             e.printStackTrace();
             return "";
         }
 
+    }
+
+    private String getLogoImgFolder() {
+        return systemInfoService.getThisJarPath() + File.separator + "logoImg";
     }
 
     @PostMapping("/system/info")

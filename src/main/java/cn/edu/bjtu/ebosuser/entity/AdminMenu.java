@@ -20,6 +20,7 @@ public class AdminMenu {
     private String component;
     private String parentId;
     private String commonOrAdmin;
+    private String index;
 
     @Transient
     private List<AdminMenu> children;
@@ -94,5 +95,13 @@ public class AdminMenu {
 
     public void setCommonOrAdmin(String commonOrAdmin) {
         this.commonOrAdmin = commonOrAdmin;
+    }
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
     }
 }

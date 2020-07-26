@@ -3,9 +3,11 @@ package cn.edu.bjtu.ebosuser.service;
 import cn.edu.bjtu.ebosuser.dao.SystemInfoRepo;
 import cn.edu.bjtu.ebosuser.entity.SystemInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.system.ApplicationHome;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.HtmlUtils;
 
+import java.io.File;
 import java.util.List;
 
 @Service
@@ -32,5 +34,11 @@ public class SystemInfoService {
 
         systemInfoRepo.deleteAll();
         systemInfoRepo.save(systemInfo);
+    }
+
+    public String getThisJarPath() {
+        ApplicationHome home = new ApplicationHome(getClass());
+        File jar = home.getSource();
+        return jar.getParentFile().toString();
     }
 }

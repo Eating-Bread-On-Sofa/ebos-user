@@ -141,7 +141,15 @@ public class AdminMenuService {
             adminMenu.setChildren(value);
             newMenu.add(adminMenu);
         });
+        Collections.sort(newMenu, new MyComparator());
         return newMenu;
+    }
+
+    class MyComparator implements Comparator<AdminMenu> {
+        public int compare(AdminMenu adminMenu1, AdminMenu adminMenu2) {
+            int result = Integer.valueOf(adminMenu1.getIndex()) - Integer.valueOf(adminMenu2.getIndex());
+            return result;
+        }
     }
 
     public void addMenu(AdminMenu adminMenu) {
