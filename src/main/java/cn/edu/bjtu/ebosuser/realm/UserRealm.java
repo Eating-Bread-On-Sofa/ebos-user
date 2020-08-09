@@ -2,7 +2,6 @@ package cn.edu.bjtu.ebosuser.realm;
 
 import cn.edu.bjtu.ebosuser.entity.User;
 import cn.edu.bjtu.ebosuser.service.AdminPermissionService;
-import cn.edu.bjtu.ebosuser.service.AdminRoleService;
 import cn.edu.bjtu.ebosuser.service.UserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -11,6 +10,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.util.ObjectUtils;
 
 import java.util.Set;
@@ -19,11 +19,12 @@ import java.util.Set;
 public class UserRealm extends AuthorizingRealm {
 
     @Autowired
+    // 把shiro相关bean的初始化与业务相关bean的初始化切断
+    @Lazy
     private UserService userService;
     @Autowired
+    @Lazy
     private AdminPermissionService adminPermissionService;
-    @Autowired
-    private AdminRoleService adminRoleService;
 
     // 简单重写获取授权信息方法
     @Override
